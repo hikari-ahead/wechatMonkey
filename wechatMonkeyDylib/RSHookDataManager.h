@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WechatPrivateClass.h"
 
 static NSString *RSParamKey = @"RSParamKey";
 
@@ -25,10 +26,17 @@ static NSString *RSParamKey = @"RSParamKey";
 + (instancetype)shareInstance;
 - (void)setFlagsToPersistence;
 - (void)getFlagsFromPersistence;
+
+- (void)avoidRevokingMessage:(CMessageWrap *)msg;
+/**
+ *  In normal condition, users tap the redpacket cell on the chat vc ,
+ *  there will pop a view up, this function is used to fetch neccessary info.
+ */
+- (void)QueryOpenRedPacktetInfo:(id)msg msgWrap:(CMessageWrap *)wrap;
+
+- (void)OnWCToHongbaoCommonResponse:(id)arg1 request:(id)arg2;
+
 @end
 
 
 
-@interface NSMutableDictionary (RSSafety)
-- (void)SafetySetObject:(id)anObject forKey:(id <NSCopying>)aKey;
-@end
