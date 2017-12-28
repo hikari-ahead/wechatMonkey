@@ -61,7 +61,6 @@
 @property(nonatomic, assign) unsigned long m_uiStatus;
 @property(nonatomic, assign) unsigned long m_uiCreateTime;
 @property(nonatomic, assign) unsigned long m_uiMessageType;
-+ (BOOL)isSenderFromMsgWrap:(CMessageWrap *) msgWrap;
 - (CMessageWrap*)initWithMsgType:(int)type;
 @end
 

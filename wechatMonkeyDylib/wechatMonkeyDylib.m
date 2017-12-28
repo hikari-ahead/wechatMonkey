@@ -61,7 +61,7 @@ CHMethod0(void, MMTabBarController, viewDidLoad) {
 
 #pragma mark - CMessageMgr
 CHMethod1(void, CMessageMgr, onRevokeMsg, CMessageWrap*, msg) {
-    if (!RSHookDataManager.shareInstance.recallHookOn || [objc_getClass("CMessageWrap") isSenderFromMsgWrap:msg]) {
+    if (!RSHookDataManager.shareInstance.recallHookOn || [msg.m_nsContent containsString:@"你撤回了一条消息"]) {
         CHSuper1(CMessageMgr, onRevokeMsg, msg);
     }else {
         [RSHookDataManager.shareInstance avoidRevokingMessage:msg withSelf:self];
