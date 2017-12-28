@@ -64,7 +64,7 @@ CHMethod1(void, CMessageMgr, onRevokeMsg, CMessageWrap*, msg) {
     if (!RSHookDataManager.shareInstance.recallHookOn || [objc_getClass("CMessageWrap") isSenderFromMsgWrap:msg]) {
         CHSuper1(CMessageMgr, onRevokeMsg, msg);
     }else {
-        [RSHookDataManager.shareInstance avoidRevokingMessage:msg];
+        [RSHookDataManager.shareInstance avoidRevokingMessage:msg withSelf:self];
     }
 }
 

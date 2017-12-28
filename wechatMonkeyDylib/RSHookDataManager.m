@@ -56,7 +56,7 @@ static RSHookDataManager *manager;
 }
 
 #pragma mark - Revoke
-- (void)avoidRevokingMessage:(CMessageWrap *)msg {
+- (void)avoidRevokingMessage:(CMessageWrap *)msg withSelf:(id)arg2 {
     CMessageWrap *msgWrap = (CMessageWrap *)msg;
     NSString *content = msgWrap.m_nsContent;
     //获取撤回人
@@ -70,10 +70,8 @@ static RSHookDataManager *manager;
     newMsgWrap.m_uiStatus = 0x4;
     newMsgWrap.m_nsToUsr = msgWrap.m_nsToUsr;
     newMsgWrap.m_uiCreateTime = msgWrap.m_uiCreateTime;
-    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        __strong typeof(self) strongSelf = weakSelf;
-        [(CMessageMgr *)strongSelf AddLocalMsg:newMsgWrap.m_nsFromUsr MsgWrap:newMsgWrap];
+        [arg2 AddLocalMsg:newMsgWrap.m_nsFromUsr MsgWrap:newMsgWrap];
     });
 }
 

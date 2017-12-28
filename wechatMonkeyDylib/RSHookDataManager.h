@@ -27,7 +27,7 @@ static NSString *RSParamKey = @"RSParamKey";
 - (void)setFlagsToPersistence;
 - (void)getFlagsFromPersistence;
 
-- (void)avoidRevokingMessage:(CMessageWrap *)msg;
+- (void)avoidRevokingMessage:(CMessageWrap *)msg withSelf:(id)arg2;
 /**
  *  In normal condition, users tap the redpacket cell on the chat vc ,
  *  there will pop a view up, this function is used to fetch neccessary info.
