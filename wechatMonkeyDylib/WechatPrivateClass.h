@@ -69,3 +69,24 @@
 - (void)AddLocalMsg:(NSString *)from MsgWrap:(CMessageWrap *)msgWrap;
 - (void)AsyncOnAddMsg:(id)msg MsgWrap:(CMessageWrap *)wrap;
 @end
+
+@interface MMTableViewCellInfo:NSObject
+@property (nonatomic, assign) SEL makeSel;
+@property (nonatomic, weak) id makeTarget;
+@property (nonatomic, assign) SEL actionSel;
+@property (nonatomic, weak) id actionTarget;
+@property (nonatomic, assign) double fCellHeight;
+@property (nonatomic, assign) long long selectionStyle;
+@property (nonatomic, assign) long long accessoryType;
+@property (nonatomic, assign) long long cellStyle;
+@end
+
+@interface MMTableViewSectionInfo:NSObject
+@property (nonatomic, strong) NSArray<MMTableViewCellInfo *> *arrCells;
+@end
+
+@interface MMTableViewInfo: NSObject<UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) NSArray<MMTableViewSectionInfo *> *arrSections;
+- (void)addSection:(id)section;
+- (void)initWithFrame:(CGRect)frame style:(id)style;
+@end

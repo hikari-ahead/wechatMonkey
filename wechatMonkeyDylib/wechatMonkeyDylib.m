@@ -22,6 +22,7 @@ CHDeclareClass(WCDeviceStepObject);
 CHDeclareClass(MMTabBarController);
 CHDeclareClass(CMessageMgr);
 CHDeclareClass(WCRedEnvelopesLogicMgr);
+CHDeclareClass(MMTableViewInfo);
 
 static __attribute__((constructor)) void entry(){
     NSLog(@"\n               🎉!!！congratulations!!！🎉\n👍----------------insert dylib success----------------👍");
@@ -58,6 +59,24 @@ CHMethod0(void, MMTabBarController, viewDidLoad) {
     [self.view addSubview:RSHookFloatingView.shareInstance];
     [self.view addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:RSHookFloatingView.shareInstance action:@selector(panGestureRecognizer:)]];
 }
+
+#pragma mark - MMTableViewInfo
+CHMethod2(NSInteger, MMTableViewInfo, tableView, id, arg1, numberOfRowsInSection, NSInteger, arg2) {
+    NSInteger result = CHSuper2(MMTableViewInfo, tableView, arg1, numberOfRowsInSection, arg2);
+    return result;
+}
+
+CHMethod1(NSInteger, MMTableViewInfo, numberOfSectionsInTableView, id, arg1) {
+    NSInteger result = CHSuper1(MMTableViewInfo, numberOfSectionsInTableView, arg1);
+    return result;
+}
+
+CHMethod2(id, MMTableViewInfo, tableView, id, arg1, cellForRowAtIndexPath, id, arg2) {
+    id cell = CHSuper2(MMTableViewInfo, tableView, arg1, cellForRowAtIndexPath, arg2);
+    return cell;
+}
+
+
 
 #pragma mark - CMessageMgr
 CHMethod1(void, CMessageMgr, onRevokeMsg, CMessageWrap*, msg) {
@@ -112,5 +131,11 @@ CHConstructor{
     CHClassHook(1, WCRedEnvelopesLogicMgr, OpenRedEnvelopesRequest);
     CHClassHook(1, WCRedEnvelopesLogicMgr, ReceiverQueryRedEnvelopesRequest);
     CHClassHook(2, WCRedEnvelopesLogicMgr, OnWCToHongbaoCommonResponse, Request);
+    
+    CHLoadLateClass(MMTableViewInfo);
+    CHClassHook1(MMTableViewInfo, numberOfSectionsInTableView);
+    CHClassHook2(MMTableViewInfo, tableView,numberOfRowsInSection);
+    CHClassHook2(MMTableViewInfo, tableView, cellForRowAtIndexPath);
+    
 }
 
