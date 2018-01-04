@@ -23,6 +23,7 @@ CHDeclareClass(MMTabBarController);
 CHDeclareClass(CMessageMgr);
 CHDeclareClass(WCRedEnvelopesLogicMgr);
 CHDeclareClass(MMTableViewInfo);
+CHDeclareClass(MicroMessengerAppDelegate);
 
 static __attribute__((constructor)) void entry(){
     NSLog(@"\n               🎉!!！congratulations!!！🎉\n👍----------------insert dylib success----------------👍");
@@ -112,6 +113,17 @@ CHOptimizedMethod2(self, void, WCRedEnvelopesLogicMgr, OnWCToHongbaoCommonRespon
     }
 }
 
+#pragma mark - MicroMessengerAppDelegate
+CHMethod2(BOOL, MicroMessengerAppDelegate, application, UIApplication*, arg1, didFinishLaunchingWithOptions, NSDictionary*, arg2) {
+    BOOL finish = CHSuper2(MicroMessengerAppDelegate, application, arg1, didFinishLaunchingWithOptions, (arg2 != nil) ? arg2 : @{});
+    NSString *key = @"CFBundleIdentifier";
+    NSLog(@"%@", [NSString stringWithFormat:@"更改前bundleId: %@", [[NSBundle mainBundle].infoDictionary valueForKey:key]]);
+    [[NSBundle mainBundle].infoDictionary setValue:@"com.tencent.xin" forKey:key];
+    NSLog(@"%@", [NSString stringWithFormat:@"更改后bundleId: %@", [[NSBundle mainBundle].infoDictionary valueForKey:key]]);
+    return finish;
+}
+
+
 #pragma mark - CHConstructor
 CHConstructor{
     CHLoadLateClass(BraceletRankStepsView);
@@ -137,5 +149,7 @@ CHConstructor{
     CHClassHook2(MMTableViewInfo, tableView,numberOfRowsInSection);
     CHClassHook2(MMTableViewInfo, tableView, cellForRowAtIndexPath);
     
+    CHLoadLateClass(MicroMessengerAppDelegate);
+    CHClassHook2(MicroMessengerAppDelegate, application, didFinishLaunchingWithOptions);
 }
 
