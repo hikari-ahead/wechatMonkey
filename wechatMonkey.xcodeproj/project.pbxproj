@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		00137DA21FEE8FE600008656 /* MethodTraceConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00137DA11FEE8FE600008656 /* MethodTraceConfig.plist */; };
-		00137DA51FEE8FE600008656 /* put ipa or app here in Resources */ = {isa = PBXBuildFile; fileRef = 00137DA41FEE8FE600008656 /* put ipa or app here */; };
 		00137DAD1FEE8FE600008656 /* libwechatMonkeyDylib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00137DAC1FEE8FE600008656 /* libwechatMonkeyDylib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		00137DB21FEE8FE600008656 /* Cycript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00137DB11FEE8FE600008656 /* Cycript.framework */; };
 		00137DB41FEE8FE600008656 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00137DB31FEE8FE600008656 /* JavaScriptCore.framework */; };
@@ -393,7 +392,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00137DA51FEE8FE600008656 /* put ipa or app here in Resources */,
 				00316ACD1FF15F6700180FEB /* Storyboard.storyboard in Resources */,
 				00137DA21FEE8FE600008656 /* MethodTraceConfig.plist in Resources */,
 				00137DE51FF0F71F00008656 /* icon_hook_pocket.png in Resources */,
