@@ -31,7 +31,12 @@
 		001810041FF1323F00160D07 /* RSHookMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 001810021FF1323F00160D07 /* RSHookMainViewController.m */; };
 		001810071FF1344500160D07 /* RSHookDataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 001810051FF1344500160D07 /* RSHookDataManager.h */; };
 		001810081FF1344500160D07 /* RSHookDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 001810061FF1344500160D07 /* RSHookDataManager.m */; };
+		00270912200A32A7001A73D2 /* RSHookSettingTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 00270910200A32A7001A73D2 /* RSHookSettingTableViewCell.h */; };
+		00270913200A32A7001A73D2 /* RSHookSettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00270911200A32A7001A73D2 /* RSHookSettingTableViewCell.m */; };
 		00316ACD1FF15F6700180FEB /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0018100A1FF1396500160D07 /* Storyboard.storyboard */; };
+		00DB39112009F68C0069B126 /* RSHookSettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DB390F2009F68C0069B126 /* RSHookSettingManager.m */; };
+		00DB39122009F68C0069B126 /* RSHookSettingManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 00DB39102009F68C0069B126 /* RSHookSettingManager.h */; };
+		00DC5D1B2009E5E70083B2DB /* RSHookHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 00DC5D1A2009E5E70083B2DB /* RSHookHeader.h */; };
 		00EA54F21FF4DA5B0058BA28 /* WechatPrivateClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EA54F11FF4DA5B0058BA28 /* WechatPrivateClass.m */; };
 		00EA54F41FF4DA740058BA28 /* WechatPrivateClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 00EA54F31FF4DA740058BA28 /* WechatPrivateClass.h */; };
 		00EA54FB1FF4E1DD0058BA28 /* NSMutableDictionary+RSSafety.h in Headers */ = {isa = PBXBuildFile; fileRef = 00EA54F91FF4E1DD0058BA28 /* NSMutableDictionary+RSSafety.h */; };
@@ -92,6 +97,11 @@
 		001810051FF1344500160D07 /* RSHookDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSHookDataManager.h; sourceTree = "<group>"; };
 		001810061FF1344500160D07 /* RSHookDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSHookDataManager.m; sourceTree = "<group>"; };
 		0018100A1FF1396500160D07 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		00270910200A32A7001A73D2 /* RSHookSettingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSHookSettingTableViewCell.h; sourceTree = "<group>"; };
+		00270911200A32A7001A73D2 /* RSHookSettingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSHookSettingTableViewCell.m; sourceTree = "<group>"; };
+		00DB390F2009F68C0069B126 /* RSHookSettingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSHookSettingManager.m; sourceTree = "<group>"; };
+		00DB39102009F68C0069B126 /* RSHookSettingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSHookSettingManager.h; sourceTree = "<group>"; };
+		00DC5D1A2009E5E70083B2DB /* RSHookHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSHookHeader.h; sourceTree = "<group>"; };
 		00EA54F11FF4DA5B0058BA28 /* WechatPrivateClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WechatPrivateClass.m; sourceTree = "<group>"; };
 		00EA54F31FF4DA740058BA28 /* WechatPrivateClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WechatPrivateClass.h; sourceTree = "<group>"; };
 		00EA54F91FF4E1DD0058BA28 /* NSMutableDictionary+RSSafety.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+RSSafety.h"; sourceTree = "<group>"; };
@@ -177,6 +187,7 @@
 				00137DD01FEE8FE600008656 /* wechatMonkeyDylib.mm */,
 				00137DD21FEE8FE600008656 /* wechatMonkeyDylib.h */,
 				00137DD41FEE8FE600008656 /* wechatMonkeyDylib.m */,
+				00DC5D1A2009E5E70083B2DB /* RSHookHeader.h */,
 				00EA54F51FF4DB1C0058BA28 /* ViewController */,
 				00137DE21FF0F42E00008656 /* Resources */,
 				00137DBC1FEE8FE600008656 /* MethodTrace */,
@@ -248,9 +259,30 @@
 			name = sb;
 			sourceTree = "<group>";
 		};
+		0027090F200A3287001A73D2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				00270910200A32A7001A73D2 /* RSHookSettingTableViewCell.h */,
+				00270911200A32A7001A73D2 /* RSHookSettingTableViewCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		00DC5D152009E55F0083B2DB /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				00DB39102009F68C0069B126 /* RSHookSettingManager.h */,
+				00DB390F2009F68C0069B126 /* RSHookSettingManager.m */,
+				001810051FF1344500160D07 /* RSHookDataManager.h */,
+				001810061FF1344500160D07 /* RSHookDataManager.m */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
 		00EA54F51FF4DB1C0058BA28 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				00DC5D152009E55F0083B2DB /* Manager */,
 				00EA54F81FF4E1A50058BA28 /* Category */,
 				001810011FF1323F00160D07 /* RSHookMainViewController.h */,
 				001810021FF1323F00160D07 /* RSHookMainViewController.m */,
@@ -263,6 +295,7 @@
 		00EA54F61FF4DB320058BA28 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0027090F200A3287001A73D2 /* Cell */,
 				00137DDE1FF0E04200008656 /* RSHookFloatingView.h */,
 				00137DDF1FF0E04200008656 /* RSHookFloatingView.m */,
 			);
@@ -272,8 +305,6 @@
 		00EA54F71FF4DB410058BA28 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				001810051FF1344500160D07 /* RSHookDataManager.h */,
-				001810061FF1344500160D07 /* RSHookDataManager.m */,
 				00EA54F31FF4DA740058BA28 /* WechatPrivateClass.h */,
 				00EA54F11FF4DA5B0058BA28 /* WechatPrivateClass.m */,
 			);
@@ -298,13 +329,16 @@
 			files = (
 				00137DD31FEE8FE600008656 /* wechatMonkeyDylib.h in Headers */,
 				00EA54FB1FF4E1DD0058BA28 /* NSMutableDictionary+RSSafety.h in Headers */,
+				00DC5D1B2009E5E70083B2DB /* RSHookHeader.h in Headers */,
 				00137DBE1FEE8FE600008656 /* ANYMethodLog.h in Headers */,
 				00137DC21FEE8FE600008656 /* MethodTrace.h in Headers */,
+				00270912200A32A7001A73D2 /* RSHookSettingTableViewCell.h in Headers */,
 				00137DCE1FEE8FE600008656 /* fishhook.h in Headers */,
 				001810071FF1344500160D07 /* RSHookDataManager.h in Headers */,
 				001810031FF1323F00160D07 /* RSHookMainViewController.h in Headers */,
 				00137DE01FF0E04200008656 /* RSHookFloatingView.h in Headers */,
 				00EA54F41FF4DA740058BA28 /* WechatPrivateClass.h in Headers */,
+				00DB39122009F68C0069B126 /* RSHookSettingManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,8 +490,10 @@
 			files = (
 				00137DC91FEE8FE600008656 /* AntiAntiDebug.m in Sources */,
 				00EA54FC1FF4E1DD0058BA28 /* NSMutableDictionary+RSSafety.m in Sources */,
+				00270913200A32A7001A73D2 /* RSHookSettingTableViewCell.m in Sources */,
 				00137DD51FEE8FE600008656 /* wechatMonkeyDylib.m in Sources */,
 				00137DC41FEE8FE600008656 /* MethodTrace.m in Sources */,
+				00DB39112009F68C0069B126 /* RSHookSettingManager.m in Sources */,
 				00137DD11FEE8FE600008656 /* wechatMonkeyDylib.mm in Sources */,
 				00EA54F21FF4DA5B0058BA28 /* WechatPrivateClass.m in Sources */,
 				001810081FF1344500160D07 /* RSHookDataManager.m in Sources */,
@@ -619,6 +655,7 @@
 				);
 				MonkeyDevPath = /opt/MonkeyDev;
 				MonkeyDevTheosPath = /opt/theos;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DTHEOS_INSTANCE_NAME=\"\\\"wechatMonkeyDylib\\\"\"",
@@ -673,6 +710,7 @@
 				);
 				MonkeyDevPath = /opt/MonkeyDev;
 				MonkeyDevTheosPath = /opt/theos;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DTHEOS_INSTANCE_NAME=\"\\\"wechatMonkeyDylib\\\"\"",
@@ -699,6 +737,7 @@
 				INFOPLIST_FILE = wechatMonkey/Info.plist;
 				MONKEYDEV_CLASS_DUMP = NO;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";
 				PRODUCT_BUNDLE_IDENTIFIER = com.resober.wechatMonkey;
@@ -716,6 +755,7 @@
 				INFOPLIST_FILE = wechatMonkey/Info.plist;
 				MONKEYDEV_CLASS_DUMP = NO;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";
 				PRODUCT_BUNDLE_IDENTIFIER = com.resober.wechatMonkey;
