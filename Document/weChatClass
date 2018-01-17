@@ -1,5 +1,15 @@
 NewSettingViewController: 我->设置
 MoreViewController: 我
+BaseMsgContentViewController: 聊天界面
+ChatRoomInfoViewController: 群聊设置界面
+AddContactToChatRoomViewController: 单聊设置页面
+
+在MoreViewController添加额外Section:
+a = [MMTableViewSectionInfo sectionInfoDefaut];
+cell = [normalCellForSel:target:title:rightValue:imageName:accessoryType:isFitIpadClassic:];
+[a addCell:cell];
+[MMTableViewInfo addSection:a];
+
 
 微信首页VC层级: pvc
 <MMTabBarController 0x10a0af800>, state: appeared, view: <UILayoutContainerView 0x1091b9a00>
@@ -11,3 +21,4 @@ MoreViewController: 我
    |    | <FindFriendEntryViewController 0x109964400>, state: disappeared, view: (view not loaded)
    | <MMUINavigationController 0x109926000>, state: appearing, view: <UILayoutContainerView 0x10d0495a0>
    |    | <MoreViewController 0x109921200>, state: disappeared, view: <MMUIHookView 0x10d092b50> not in the window
+
