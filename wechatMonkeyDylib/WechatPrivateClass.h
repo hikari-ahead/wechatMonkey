@@ -90,6 +90,9 @@
 @property (nonatomic, assign) long long cellStyle;
 @property (nonatomic, strong) MMTableViewCell *cell;
 - (void)makeNormalCell:(id)arg1;
+- (void)makeSwitchCell:(id)arg1;    // IMP=0x000000010294a838
++ (id)normalCellForSel:(SEL)arg1 target:(id)arg2 title:(id)arg3 rightValue:(id)arg4 imageName:(id)arg5 accessoryType:(long long)arg6;    // IMP=0x000000010294e058
++ (id)switchCellForSel:(SEL)arg1 target:(id)arg2 title:(id)arg3 on:(_Bool)arg4 isFitIpadClassic:(_Bool)arg5;    // IMP=0x000000010294f014
 @end
 
 
@@ -116,4 +119,5 @@
 @property (nonatomic, strong) UITableView *tableView;
 - (void)addSection:(id)section;
 - (void)initWithFrame:(CGRect)frame style:(id)style;
++ (id)sectionInfoDefaut;
 @end

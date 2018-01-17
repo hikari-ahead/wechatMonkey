@@ -98,6 +98,11 @@ CHMethod2(NSInteger, MMTableViewInfo, tableView, id, arg1, heightForRowAtIndexPa
     return result;
 }
 
+#pragma mark - MMTableViewCellInfo
+CHMethod1(void, MMTableViewCellInfo, makeSwitchCell, id, arg1) {
+    CHSuper1(MMTableViewCellInfo, makeSwitchCell, arg1);
+}
+
 
 #pragma mark - NewSettingViewController
 CHMethod0(void, MoreViewController, viewDidLoad) {
@@ -108,16 +113,7 @@ CHMethod0(void, MoreViewController, viewDidLoad) {
 CHMethod0(void, MoreViewController, addSettingSection) {
     CHSuper0(MoreViewController, addSettingSection);
     NSLog(@"MoreViewController addSettingSection -- Hooked");
-    
-    //
-    Class class = objc_getClass("MMTableViewSectionInfo");
-    MMTableViewSectionInfo *hookSectionInfo = ((id(*)(id, SEL))objc_msgSend)(class, @selector(sectionInfoDefaut));
-
-    SEL makeCellInfoSEL = @selector(normalCellForSel:target:title:rightValue:imageName:accessoryType:isFitIpadClassic:);
-    
-    id(*objc_msgSendTyped)(id self, SEL _cmd, SEL normalCellForSel, id target, id title, id rightValue, id imageName, long long accessoryType, _Bool isFitIpadClassic) = (void*)objc_msgSend;
-    MMTableViewCellInfo *cellInfo = objc_msgSendTyped(objc_getClass("MMTableViewCellInfo"), makeCellInfoSEL, @selector(showHookSettingController:), [RSHookSettingManager sharedRSHookSettingManager], @"hook", 0, @"icon_hook_hammer_small", 1, 1);
-    [hookSectionInfo addCell:cellInfo];
+    id hookSectionInfo = [[RSHookSettingManager sharedRSHookSettingManager] hookSectionForMoreViewController];
     Ivar ivar = class_getInstanceVariable(objc_getClass("MoreViewController"), "m_tableViewInfo");
     MMTableViewInfo *moreVCTableInfo = object_getIvar(self, ivar);
     [moreVCTableInfo addSection:hookSectionInfo];
@@ -131,8 +127,15 @@ CHMethod0(void, MoreViewController, reloadMoreView) {
 
 #pragma mark - ChatRoomInfoViewController
 CHMethod0(void, ChatRoomInfoViewController, reloadTableData) {
+    id hookSectionInfo = [[RSHookSettingManager sharedRSHookSettingManager] redPackSwitchCellForChatRoomSettingViewController:self cellTitle:@"自动抢红包"];
+    Ivar ivar = class_getInstanceVariable(objc_getClass("ChatRoomInfoViewController"), "m_tableViewInfo");
+    MMTableViewInfo *moreVCTableInfo = object_getIvar(self, ivar);
+    [moreVCTableInfo addSection:hookSectionInfo];
     CHSuper0(ChatRoomInfoViewController, reloadTableData);
-    
+}
+
+CHMethod0(void, ChatRoomInfoViewController, initView) {
+    CHSuper0(ChatRoomInfoViewController, initView);
 }
 
 
@@ -211,8 +214,12 @@ CHConstructor{
     CHClassHook2(MMTableViewInfo, tableView, heightForRowAtIndexPath);
     
     CHLoadLateClass(MMTableViewSectionInfo);
+    
     CHLoadLateClass(MMTableViewCellInfo);
+    CHHook1(MMTableViewCellInfo, makeSwitchCell);
+    
     CHLoadLateClass(MMTableViewCell);
+    
     CHLoadLateClass(MMTableViewUserInfo);
     
     CHLoadLateClass(MoreViewController);
@@ -222,6 +229,6 @@ CHConstructor{
     
     CHLoadLateClass(ChatRoomInfoViewController);
     CHClassHook0(ChatRoomInfoViewController, reloadTableData);
-
+    CHClassHook0(ChatRoomInfoViewController, initView);
 }
 

@@ -14,6 +14,10 @@
 
 @interface RSHookSettingManager:NSObject
 singleton_interface(RSHookSettingManager);
-- (id)cellForHookSetting:(id)tableView indexPath:(NSIndexPath *)indexPath;
+- (id)singleCellSectionWithImageName:(NSString *)imageName title:(NSString *)title target:(id)target selector:(SEL)selector;
+- (id)redPackSwitchCellForChatRoomSettingViewController:(id)viewController cellTitle:(NSString *)title;
+/** 进入设置页面 */
 - (void)showHookSettingController:(id)sender;
+/** 我的页面hook设置入口 */
+- (id)hookSectionForMoreViewController;
 @end
