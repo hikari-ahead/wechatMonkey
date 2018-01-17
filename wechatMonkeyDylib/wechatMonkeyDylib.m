@@ -33,6 +33,7 @@ CHDeclareClass(MMTableViewCell);
 CHDeclareClass(MMTableViewUserInfo);
 
 CHDeclareClass(MoreViewController);
+CHDeclareClass(ChatRoomInfoViewController);
 
 static __attribute__((constructor)) void entry(){
     NSLog(@"\n               🎉!!！congratulations!!！🎉\n👍----------------insert dylib success----------------👍");
@@ -128,6 +129,12 @@ CHMethod0(void, MoreViewController, reloadMoreView) {
     NSLog(@"MoreViewController reloadMoreView -- Hooked");
 }
 
+#pragma mark - ChatRoomInfoViewController
+CHMethod0(void, ChatRoomInfoViewController, reloadTableData) {
+    CHSuper0(ChatRoomInfoViewController, reloadTableData);
+    
+}
+
 
 #pragma mark - CMessageMgr
 CHMethod1(void, CMessageMgr, onRevokeMsg, CMessageWrap*, msg) {
@@ -212,5 +219,9 @@ CHConstructor{
     CHClassHook0(MoreViewController, viewDidLoad);
     CHClassHook0(MoreViewController, addSettingSection);
     CHClassHook0(MoreViewController, reloadMoreView);
+    
+    CHLoadLateClass(ChatRoomInfoViewController);
+    CHClassHook0(ChatRoomInfoViewController, reloadTableData);
+
 }
 
