@@ -10,7 +10,7 @@
 #import "WechatPrivateClass.h"
 
 typedef void(^RSHookSettingTableViewCellClickBlock)();
-@interface RSHookSettingTableViewCell : MMTableViewCell
+@interface RSHookSettingTableViewCell : UITableViewCell
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) UIImage *icon;
 @property (nonatomic, copy)  RSHookSettingTableViewCellClickBlock clickBlock;

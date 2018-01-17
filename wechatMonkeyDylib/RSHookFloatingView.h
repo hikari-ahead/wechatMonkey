@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RSHookMainViewController.h"
 
 @interface RSHookFloatingView : UIView
+@property (nonatomic, strong) RSHookMainViewController *mainHookVC;
 + (instancetype)shareInstance;
 - (void)panGestureRecognizer:(UIPanGestureRecognizer *)gesture;
 @end

@@ -15,4 +15,5 @@
 @interface RSHookSettingManager:NSObject
 singleton_interface(RSHookSettingManager);
 - (id)cellForHookSetting:(id)tableView indexPath:(NSIndexPath *)indexPath;
+- (void)showHookSettingController:(id)sender;
 @end

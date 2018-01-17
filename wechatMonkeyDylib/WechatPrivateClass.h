@@ -108,6 +108,7 @@
     NSMutableArray *_arrCells;    // 72 = 0x48
     _Bool _bUseDynamicSize;    // 80 = 0x50
 }
+- (void)addCell:(id)arg1;    // IMP=0x0000000102914678
 @end
 
 @interface MMTableViewInfo: NSObject<UITableViewDelegate, UITableViewDataSource>

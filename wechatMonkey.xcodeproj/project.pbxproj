@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00023995200F827100FF7228 /* UIImage+RSLength.h in Headers */ = {isa = PBXBuildFile; fileRef = 00023993200F827100FF7228 /* UIImage+RSLength.h */; };
+		00023996200F827100FF7228 /* UIImage+RSLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 00023994200F827100FF7228 /* UIImage+RSLength.m */; };
+		0002399F200F89F500FF7228 /* icon_hook_hammer_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0002399D200F89F500FF7228 /* icon_hook_hammer_small@2x.png */; };
+		000239A0200F89F500FF7228 /* icon_hook_hammer_small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0002399E200F89F500FF7228 /* icon_hook_hammer_small@3x.png */; };
 		00137DA21FEE8FE600008656 /* MethodTraceConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00137DA11FEE8FE600008656 /* MethodTraceConfig.plist */; };
 		00137DAD1FEE8FE600008656 /* libwechatMonkeyDylib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00137DAC1FEE8FE600008656 /* libwechatMonkeyDylib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		00137DB21FEE8FE600008656 /* Cycript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00137DB11FEE8FE600008656 /* Cycript.framework */; };
@@ -67,6 +71,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00023993200F827100FF7228 /* UIImage+RSLength.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+RSLength.h"; sourceTree = "<group>"; };
+		00023994200F827100FF7228 /* UIImage+RSLength.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RSLength.m"; sourceTree = "<group>"; };
+		0002399D200F89F500FF7228 /* icon_hook_hammer_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_hook_hammer_small@2x.png"; sourceTree = "<group>"; };
+		0002399E200F89F500FF7228 /* icon_hook_hammer_small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_hook_hammer_small@3x.png"; sourceTree = "<group>"; };
 		00137D9E1FEE8FE600008656 /* wechatMonkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wechatMonkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00137DA11FEE8FE600008656 /* MethodTraceConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MethodTraceConfig.plist; sourceTree = "<group>"; };
 		00137DA41FEE8FE600008656 /* put ipa or app here */ = {isa = PBXFileReference; lastKnownFileType = text; name = "put ipa or app here"; path = "TargetApp/put ipa or app here"; sourceTree = "<group>"; };
@@ -247,6 +255,8 @@
 			isa = PBXGroup;
 			children = (
 				00137DE41FF0F45800008656 /* icon_hook_pocket.png */,
+				0002399D200F89F500FF7228 /* icon_hook_hammer_small@2x.png */,
+				0002399E200F89F500FF7228 /* icon_hook_hammer_small@3x.png */,
 			);
 			name = icon;
 			sourceTree = "<group>";
@@ -316,6 +326,8 @@
 			children = (
 				00EA54F91FF4E1DD0058BA28 /* NSMutableDictionary+RSSafety.h */,
 				00EA54FA1FF4E1DD0058BA28 /* NSMutableDictionary+RSSafety.m */,
+				00023993200F827100FF7228 /* UIImage+RSLength.h */,
+				00023994200F827100FF7228 /* UIImage+RSLength.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -339,6 +351,7 @@
 				00137DE01FF0E04200008656 /* RSHookFloatingView.h in Headers */,
 				00EA54F41FF4DA740058BA28 /* WechatPrivateClass.h in Headers */,
 				00DB39122009F68C0069B126 /* RSHookSettingManager.h in Headers */,
+				00023995200F827100FF7228 /* UIImage+RSLength.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,7 +441,9 @@
 			files = (
 				00316ACD1FF15F6700180FEB /* Storyboard.storyboard in Resources */,
 				00137DA21FEE8FE600008656 /* MethodTraceConfig.plist in Resources */,
+				000239A0200F89F500FF7228 /* icon_hook_hammer_small@3x.png in Resources */,
 				00137DE51FF0F71F00008656 /* icon_hook_pocket.png in Resources */,
+				0002399F200F89F500FF7228 /* icon_hook_hammer_small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +505,7 @@
 			files = (
 				00137DC91FEE8FE600008656 /* AntiAntiDebug.m in Sources */,
 				00EA54FC1FF4E1DD0058BA28 /* NSMutableDictionary+RSSafety.m in Sources */,
+				00023996200F827100FF7228 /* UIImage+RSLength.m in Sources */,
 				00270913200A32A7001A73D2 /* RSHookSettingTableViewCell.m in Sources */,
 				00137DD51FEE8FE600008656 /* wechatMonkeyDylib.m in Sources */,
 				00137DC41FEE8FE600008656 /* MethodTrace.m in Sources */,

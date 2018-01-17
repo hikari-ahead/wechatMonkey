@@ -10,32 +10,17 @@
 #import <objc/runtime.h>
 #import "RSHookSettingTableViewCell.h"
 #import "RSHookHeader.h"
+#import "RSHookFloatingView.h"
 
 @implementation RSHookSettingManager
 singleton_implementation(RSHookSettingManager)
 
-- (id)cellForHookSetting:(id)tableView indexPath:(NSIndexPath *)indexPath {
-    NSString *reuseId = NSStringFromClass([RSHookSettingTableViewCell class]);
-    [tableView registerClass:[RSHookSettingTableViewCell class] forCellReuseIdentifier:reuseId];
-    RSHookSettingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId forIndexPath:indexPath];
-    if (!cell) {
-        // 需要创建一个自定义的cell
-        cell = [[RSHookSettingTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseId];
-    }
-    
-    [cell setClickBlock:^{
-        [self showHookSettingController];
-    }];
-    cell.icon = [UIImage imageNamed:@"icon_hook_pocket"];
-    cell.name = @"hook";
-    [cell configCell];
-    cell.backgroundColor = [UIColor whiteColor];
-    cell.frame = CGRectMake(CGRectGetMinX(cell.frame), CGRectGetMinY(cell.frame), CGRectGetWidth(cell.frame), 44.f);
-    ((UITableView *)tableView).rowHeight = UITableViewAutomaticDimension;
-    return cell;
-}
-
-- (void)showHookSettingController {
+- (void)showHookSettingController:(id)sender {
     NSLog(@"Tappppppppped!!");
+    if (![RSHookFloatingView shareInstance].mainHookVC) {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+        [RSHookFloatingView shareInstance].mainHookVC = [storyBoard instantiateViewControllerWithIdentifier:@"RSHookMainViewController"];
+    }
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[RSHookFloatingView shareInstance].mainHookVC animated:YES completion:NULL];
 }
 @end

@@ -1,0 +1,13 @@
+NewSettingViewController: 我->设置
+MoreViewController: 我
+
+微信首页VC层级: pvc
+<MMTabBarController 0x10a0af800>, state: appeared, view: <UILayoutContainerView 0x1091b9a00>
+   | <MMUINavigationController 0x10a08de00>, state: disappearing, view: <UILayoutContainerView 0x1091a1d40> not in the window
+   |    | <NewMainFrameViewController 0x10a08d800>, state: disappearing, view: <MMUIHookView 0x10d05bcf0> not in the window
+   | <MMUINavigationController 0x10a09bc00>, state: disappeared, view: <UILayoutContainerView 0x10d0887c0> not in the window
+   |    | <ContactsViewController 0x10a093600>, state: disappeared, view: (view not loaded)
+   | <MMUINavigationController 0x10a0af200>, state: disappeared, view: <UILayoutContainerView 0x1091b6960> not in the window
+   |    | <FindFriendEntryViewController 0x109964400>, state: disappeared, view: (view not loaded)
+   | <MMUINavigationController 0x109926000>, state: appearing, view: <UILayoutContainerView 0x10d0495a0>
+   |    | <MoreViewController 0x109921200>, state: disappeared, view: <MMUIHookView 0x10d092b50> not in the window

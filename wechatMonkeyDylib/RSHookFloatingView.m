@@ -7,13 +7,11 @@
 //
 
 #import "RSHookFloatingView.h"
-#import "RSHookMainViewController.h"
 
 static RSHookFloatingView *instance;
 
 @interface RSHookFloatingView()
 @property (nonatomic, strong) UIButton *btnIcon;
-@property (nonatomic, strong) RSHookMainViewController *mainHookVC;
 @end
 
 @implementation RSHookFloatingView

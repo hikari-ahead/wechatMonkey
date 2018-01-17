@@ -16,6 +16,7 @@
 #import "RSHookDataManager.h"
 #import "WechatPrivateClass.h"
 #import "RSHookSettingManager.h"
+#import <objc/runtime.h>
 
 #pragma mark - Declare
 CHDeclareClass(BraceletRankStepsView);
@@ -31,6 +32,7 @@ CHDeclareClass(MMTableViewCellInfo);
 CHDeclareClass(MMTableViewCell);
 CHDeclareClass(MMTableViewUserInfo);
 
+CHDeclareClass(MoreViewController);
 
 static __attribute__((constructor)) void entry(){
     NSLog(@"\n               🎉!!！congratulations!!！🎉\n👍----------------insert dylib success----------------👍");
@@ -61,11 +63,11 @@ CHMethod0(unsigned int, WCDeviceStepObject, m7StepCount) {
 CHMethod0(void, MMTabBarController, viewDidLoad) {
     CHSuper0(MMTabBarController, viewDidLoad);
     // 添加hook视图
-    if (RSHookFloatingView.shareInstance.superview) {
-        [RSHookFloatingView.shareInstance removeFromSuperview];
-    }
-    [self.view addSubview:RSHookFloatingView.shareInstance];
-    [self.view addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:RSHookFloatingView.shareInstance action:@selector(panGestureRecognizer:)]];
+//    if (RSHookFloatingView.shareInstance.superview) {
+//        [RSHookFloatingView.shareInstance removeFromSuperview];
+//    }
+//    [self.view addSubview:RSHookFloatingView.shareInstance];
+//    [self.view addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:RSHookFloatingView.shareInstance action:@selector(panGestureRecognizer:)]];
 }
 
 #pragma mark - MMTableViewInfo
@@ -86,29 +88,44 @@ CHMethod1(NSInteger, MMTableViewInfo, numberOfSectionsInTableView, id, arg1) {
 }
 
 CHMethod2(id, MMTableViewInfo, tableView, id, arg1, cellForRowAtIndexPath, id, arg2) {
-    id cell = CHSuper2(MMTableViewInfo, tableView, arg1, cellForRowAtIndexPath, arg2);
-    if ([arg2 isKindOfClass:[NSIndexPath class]]) {
-        NSIndexPath *idp = ((NSIndexPath *)arg2);
-        NSUInteger sectionCount = [[arg1 dataSource] performSelector:@selector(numberOfSectionsInTableView:) withObject:arg1];
-        if (sectionCount - 1 == idp.section) {
-            UITableViewCell *cell = [RSHookSettingManager.sharedRSHookSettingManager cellForHookSetting:arg1 indexPath:arg2];
-            return cell;
-        }
-    }
-    return cell;
+    return CHSuper2(MMTableViewInfo, tableView, arg1, cellForRowAtIndexPath, arg2);
 }
 
 
 CHMethod2(NSInteger, MMTableViewInfo, tableView, id, arg1, heightForRowAtIndexPath, id, arg2) {
-    NSIndexPath *idp = ((NSIndexPath *)arg2);
-    NSUInteger sectionCount = [[arg1 dataSource] performSelector:@selector(numberOfSectionsInTableView:) withObject:arg1];
-    if (sectionCount - 1 == idp.section) {
-        // 目标注入section
-        return 44;
-    }else {
-        NSInteger result = CHSuper2(MMTableViewInfo, tableView, arg1, heightForRowAtIndexPath, arg2);
-        return result;
-    }
+    NSInteger result = CHSuper2(MMTableViewInfo, tableView, arg1, heightForRowAtIndexPath, arg2);
+    return result;
+}
+
+
+#pragma mark - NewSettingViewController
+CHMethod0(void, MoreViewController, viewDidLoad) {
+    CHSuper0(MoreViewController, viewDidLoad);
+    NSLog(@"MoreViewController viewDidLoad -- Hooked");
+}
+
+CHMethod0(void, MoreViewController, addSettingSection) {
+    CHSuper0(MoreViewController, addSettingSection);
+    NSLog(@"MoreViewController addSettingSection -- Hooked");
+    
+    //
+    Class class = objc_getClass("MMTableViewSectionInfo");
+    MMTableViewSectionInfo *hookSectionInfo = ((id(*)(id, SEL))objc_msgSend)(class, @selector(sectionInfoDefaut));
+
+    SEL makeCellInfoSEL = @selector(normalCellForSel:target:title:rightValue:imageName:accessoryType:isFitIpadClassic:);
+    
+    id(*objc_msgSendTyped)(id self, SEL _cmd, SEL normalCellForSel, id target, id title, id rightValue, id imageName, long long accessoryType, _Bool isFitIpadClassic) = (void*)objc_msgSend;
+    MMTableViewCellInfo *cellInfo = objc_msgSendTyped(objc_getClass("MMTableViewCellInfo"), makeCellInfoSEL, @selector(showHookSettingController:), [RSHookSettingManager sharedRSHookSettingManager], @"hook", 0, @"icon_hook_hammer_small", 1, 1);
+    [hookSectionInfo addCell:cellInfo];
+    Ivar ivar = class_getInstanceVariable(objc_getClass("MoreViewController"), "m_tableViewInfo");
+    MMTableViewInfo *moreVCTableInfo = object_getIvar(self, ivar);
+    [moreVCTableInfo addSection:hookSectionInfo];
+}
+
+
+CHMethod0(void, MoreViewController, reloadMoreView) {
+    CHSuper0(MoreViewController, reloadMoreView);
+    NSLog(@"MoreViewController reloadMoreView -- Hooked");
 }
 
 
@@ -190,5 +207,10 @@ CHConstructor{
     CHLoadLateClass(MMTableViewCellInfo);
     CHLoadLateClass(MMTableViewCell);
     CHLoadLateClass(MMTableViewUserInfo);
+    
+    CHLoadLateClass(MoreViewController);
+    CHClassHook0(MoreViewController, viewDidLoad);
+    CHClassHook0(MoreViewController, addSettingSection);
+    CHClassHook0(MoreViewController, reloadMoreView);
 }
 
