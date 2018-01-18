@@ -23,6 +23,8 @@ _instance = [[class alloc] init]; \
 return _instance; \
 }
 
+/** 顶级控制器 */
+#define topViewControllerInWeChat [[((UITabBarController *)[[[UIApplication sharedApplication].delegate window] rootViewController]) selectedViewController] topViewController]
 
 /** 强弱引用 */
 #ifndef weakify

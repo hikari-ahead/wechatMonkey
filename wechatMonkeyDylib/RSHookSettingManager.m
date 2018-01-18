@@ -7,14 +7,12 @@
 //
 
 #import "RSHookSettingManager.h"
-#import <objc/runtime.h>
 #import "RSHookSettingTableViewCell.h"
 #import "RSHookHeader.h"
 #import "RSHookFloatingView.h"
 #import <objc/runtime.h>
 #import <objc/message.h>
 
-#define topViewControllerInWeChat [[((UITabBarController *)[[[UIApplication sharedApplication].delegate window] rootViewController]) selectedViewController] topViewController]
 @implementation RSHookSettingManager
 singleton_implementation(RSHookSettingManager)
 
@@ -59,9 +57,11 @@ singleton_implementation(RSHookSettingManager)
 }
 
 - (void)redPackSwitchChanged:(id)sender {
-    if (NSClassFromString(@"")) {
-        
+    if (![NSStringFromClass([topViewControllerInWeChat class]) isEqualToString:@"ChatRoomInfoViewController"]) {
+        return;
     }
+    
+    id chatRoomVC = topViewControllerInWeChat;
     
 }
 
