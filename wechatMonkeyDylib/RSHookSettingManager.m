@@ -7,6 +7,7 @@
 //
 
 #import "RSHookSettingManager.h"
+#import "RSHookDataManager.h"
 #import "RSHookSettingTableViewCell.h"
 #import "RSHookHeader.h"
 #import "RSHookFloatingView.h"
@@ -51,18 +52,60 @@ singleton_implementation(RSHookSettingManager)
 }
 
 - (id)redPackSwitchCellForChatRoomSettingViewController:(id)viewController cellTitle:(NSString *)title {
-    
-    id sectionInfo = [self singleSwitchCellSectionWithTitle:title target:self selector:@selector(redPackSwitchChanged:) on:YES];
+    // 默认是开启抢红包的
+    BOOL on = YES;
+    NSMutableDictionary *mDic = [[RSHookDataManager shareInstance].userDefault objectForKey:rsHookRedPackOnDicKey];
+    NSString *key = [self redPackKeyForCurrentTopViewController];
+    if (!key) {
+        NSLog(@"发生了错误");
+        return nil;
+    }
+    if (mDic && [mDic.allKeys containsObject:key]) {
+        on = [mDic[key] boolValue];
+    }
+    id sectionInfo = [self singleSwitchCellSectionWithTitle:title target:self selector:@selector(redPackSwitchChanged:) on:on];
     return sectionInfo;
 }
 
-- (void)redPackSwitchChanged:(id)sender {
-    if (![NSStringFromClass([topViewControllerInWeChat class]) isEqualToString:@"ChatRoomInfoViewController"]) {
+- (void)redPackSwitchChanged:(UISwitch *)sender {
+    NSString *key = [self redPackKeyForCurrentTopViewController];
+    if (!key) {
         return;
     }
-    
+    id mDic = [[RSHookDataManager shareInstance].userDefault objectForKey:rsHookRedPackOnDicKey];
+    if (!mDic) {
+        mDic = [NSMutableDictionary new];
+    }else {
+        mDic = [[NSMutableDictionary alloc] initWithDictionary:mDic];
+    }
+    mDic[key] = [NSNumber numberWithBool:sender.isOn];
+    [[RSHookDataManager shareInstance].userDefault setObject:mDic forKey:rsHookRedPackOnDicKey];
+    [[RSHookDataManager shareInstance].userDefault synchronize];
+}
+
+
+- (NSString *)redPackKeyForCurrentTopViewController {
     id chatRoomVC = topViewControllerInWeChat;
+    BOOL topVCIsChatRoomVC = [NSStringFromClass([chatRoomVC class]) isEqualToString:@"ChatRoomInfoViewController"];
+    BOOL topVCIsAddContactVC = [NSStringFromClass([chatRoomVC class]) isEqualToString:@"AddContactToChatRoomViewController"];
+    if (!topVCIsChatRoomVC && !topVCIsAddContactVC) {
+        return nil;
+    }
     
+    id m_contact;
+    NSString *m_nsUsrName;
+    if (topVCIsChatRoomVC) {
+        m_contact = [chatRoomVC performSelector:@selector(m_chatRoomContact)];
+        m_nsUsrName = [m_contact performSelector:@selector(m_nsUsrName)];
+        
+    }
+    
+    if (topVCIsAddContactVC) {
+        m_contact = [chatRoomVC performSelector:@selector(m_contact)];
+        m_nsUsrName = [m_contact performSelector:@selector(m_nsUsrName)];
+    }
+    NSString *key = [NSString stringWithFormat:@"%@_%@", rsHookRedPackOnPrefix, m_nsUsrName];
+    return key;
 }
 
 @end

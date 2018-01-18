@@ -11,6 +11,7 @@
 #import "wechatMonkeyDylib.h"
 #import <objc/message.h>
 #import "NSMutableDictionary+RSSafety.h"
+#import "RSHookHeader.h"
 
 static RSHookDataManager *manager;
 @interface RSHookDataManager()
@@ -55,6 +56,14 @@ static RSHookDataManager *manager;
     [_userDefault setInteger:self.footCount forKey:@"footCount"];
 }
 
+- (NSMutableDictionary *)dicForRedPackOnStatus {
+    id mDic = [[RSHookDataManager shareInstance].userDefault objectForKey:rsHookRedPackOnDicKey];
+    if (mDic) {
+        mDic = [[NSMutableDictionary alloc] initWithDictionary:mDic];
+    }
+    return mDic;
+}
+
 #pragma mark - Revoke
 - (void)avoidRevokingMessage:(CMessageWrap *)msg withSelf:(id)arg2 {
     CMessageWrap *msgWrap = (CMessageWrap *)msg;
@@ -90,6 +99,17 @@ static RSHookDataManager *manager;
             id contactManager =[[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("CContactMgr")];
             id selfContact = [contactManager getSelfContact];
             id m_nsUsrName = [selfContact m_nsUsrName];
+            
+            NSDictionary *redPackDic = [self dicForRedPackOnStatus];
+            if (redPackDic) {
+                // 判断是否针对这个人或群聊关闭了抢红包, 默认开启
+                NSString *key = [NSString stringWithFormat:@"%@_%@", rsHookRedPackOnPrefix, m_nsFromUsr];
+                BOOL hasRecord = [redPackDic.allKeys containsObject:key];
+                if (hasRecord && ![[redPackDic valueForKey:key] boolValue]) {
+                    // 存在记录，并且记录为关闭状态
+                    return; 
+                }
+            }
             
             if ([m_nsFromUsr isEqualToString:m_nsUsrName]) {
                 // 这个地方代表别人收取了红包

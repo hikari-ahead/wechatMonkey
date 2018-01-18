@@ -9,6 +9,9 @@
 #ifndef RSHookHeader_h
 #define RSHookHeader_h
 
+static NSString * const rsHookRedPackOnDicKey = @"rsHookRedPackOnDicKey";
+static NSString * const rsHookRedPackOnPrefix = @"autoGrabRedPack";
+
 /** 单例宏 */
 #define singleton_interface(class) + (instancetype)shared##class;
 

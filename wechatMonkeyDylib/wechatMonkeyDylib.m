@@ -34,6 +34,8 @@ CHDeclareClass(MMTableViewUserInfo);
 
 CHDeclareClass(MoreViewController);
 CHDeclareClass(ChatRoomInfoViewController);
+CHDeclareClass(AddContactToChatRoomViewController);
+
 
 static __attribute__((constructor)) void entry(){
     NSLog(@"\n               🎉!!！congratulations!!！🎉\n👍----------------insert dylib success----------------👍");
@@ -124,6 +126,9 @@ CHMethod0(void, MoreViewController, reloadMoreView) {
 CHMethod0(void, ChatRoomInfoViewController, reloadTableData) {
     CHSuper0(ChatRoomInfoViewController, reloadTableData);
     id hookSectionInfo = [[RSHookSettingManager sharedRSHookSettingManager] redPackSwitchCellForChatRoomSettingViewController:self cellTitle:@"自动抢红包"];
+    if (!hookSectionInfo) {
+        return;
+    }
     Ivar ivar = class_getInstanceVariable(objc_getClass("ChatRoomInfoViewController"), "m_tableViewInfo");
     MMTableViewInfo *moreVCTableInfo = object_getIvar(self, ivar);
     [moreVCTableInfo addSection:hookSectionInfo];
@@ -137,6 +142,21 @@ CHMethod0(void, ChatRoomInfoViewController, initView) {
     CHSuper0(ChatRoomInfoViewController, initView);
 }
 
+#pragma mark - AddContactToChatRoomViewController
+CHMethod0(void, AddContactToChatRoomViewController, reloadTableData) {
+    CHSuper0(AddContactToChatRoomViewController, reloadTableData);
+    id hookSectionInfo = [[RSHookSettingManager sharedRSHookSettingManager] redPackSwitchCellForChatRoomSettingViewController:self cellTitle:@"自动抢红包"];
+    if (!hookSectionInfo) {
+        return;
+    }
+    Ivar ivar = class_getInstanceVariable(objc_getClass("AddContactToChatRoomViewController"), "m_tableViewInfo");
+    MMTableViewInfo *moreVCTableInfo = object_getIvar(self, ivar);
+    [moreVCTableInfo addSection:hookSectionInfo];
+    // 因为微信在调用reloadTableData时会先调用clearAllSection 所有在这里注入section之后调用tableView再次刷新
+    Ivar tableViewIvar = class_getInstanceVariable(objc_getClass("MMTableViewInfo"), "_tableView");
+    UITableView *tableView = object_getIvar(moreVCTableInfo, tableViewIvar);
+    [tableView reloadData];
+}
 
 #pragma mark - CMessageMgr
 CHMethod1(void, CMessageMgr, onRevokeMsg, CMessageWrap*, msg) {
@@ -229,5 +249,9 @@ CHConstructor{
     CHLoadLateClass(ChatRoomInfoViewController);
     CHClassHook0(ChatRoomInfoViewController, reloadTableData);
     CHClassHook0(ChatRoomInfoViewController, initView);
+    
+    CHLoadLateClass(AddContactToChatRoomViewController);
+    CHClassHook0(AddContactToChatRoomViewController, reloadTableData);
+
 }
 
