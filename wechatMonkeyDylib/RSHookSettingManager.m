@@ -14,6 +14,7 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
+#define topViewControllerInWeChat [[((UITabBarController *)[[[UIApplication sharedApplication].delegate window] rootViewController]) selectedViewController] topViewController]
 @implementation RSHookSettingManager
 singleton_implementation(RSHookSettingManager)
 
@@ -58,6 +59,9 @@ singleton_implementation(RSHookSettingManager)
 }
 
 - (void)redPackSwitchChanged:(id)sender {
+    if (NSClassFromString(@"")) {
+        
+    }
     
 }
 

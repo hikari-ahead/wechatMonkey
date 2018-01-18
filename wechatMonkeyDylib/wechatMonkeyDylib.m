@@ -74,22 +74,17 @@ CHMethod0(void, MMTabBarController, viewDidLoad) {
 #pragma mark - MMTableViewInfo
 CHMethod2(NSInteger, MMTableViewInfo, tableView, id, arg1, numberOfRowsInSection, NSInteger, arg2) {
     NSInteger result = CHSuper2(MMTableViewInfo, tableView, arg1, numberOfRowsInSection, arg2);
-    NSUInteger sectionCount = [[arg1 dataSource] performSelector:@selector(numberOfSectionsInTableView:) withObject:arg1];
-    if (sectionCount - 1 == arg2) {
-        // 目标注入section
-        return 1;
-    }
     return result;
 }
 
 CHMethod1(NSInteger, MMTableViewInfo, numberOfSectionsInTableView, id, arg1) {
     NSInteger result = CHSuper1(MMTableViewInfo, numberOfSectionsInTableView, arg1);
-    // 额外显示一个section防止hooksetting
-    return (result + 1);
+    return result;
 }
 
 CHMethod2(id, MMTableViewInfo, tableView, id, arg1, cellForRowAtIndexPath, id, arg2) {
-    return CHSuper2(MMTableViewInfo, tableView, arg1, cellForRowAtIndexPath, arg2);
+    id cell = CHSuper2(MMTableViewInfo, tableView, arg1, cellForRowAtIndexPath, arg2);
+    return cell;
 }
 
 
@@ -127,11 +122,15 @@ CHMethod0(void, MoreViewController, reloadMoreView) {
 
 #pragma mark - ChatRoomInfoViewController
 CHMethod0(void, ChatRoomInfoViewController, reloadTableData) {
+    CHSuper0(ChatRoomInfoViewController, reloadTableData);
     id hookSectionInfo = [[RSHookSettingManager sharedRSHookSettingManager] redPackSwitchCellForChatRoomSettingViewController:self cellTitle:@"自动抢红包"];
     Ivar ivar = class_getInstanceVariable(objc_getClass("ChatRoomInfoViewController"), "m_tableViewInfo");
     MMTableViewInfo *moreVCTableInfo = object_getIvar(self, ivar);
     [moreVCTableInfo addSection:hookSectionInfo];
-    CHSuper0(ChatRoomInfoViewController, reloadTableData);
+    // 因为微信在调用reloadTableData时会先调用clearAllSection 所有在这里注入section之后调用tableView再次刷新
+    Ivar tableViewIvar = class_getInstanceVariable(objc_getClass("MMTableViewInfo"), "_tableView");
+    UITableView *tableView = object_getIvar(moreVCTableInfo, tableViewIvar);
+    [tableView reloadData];
 }
 
 CHMethod0(void, ChatRoomInfoViewController, initView) {
