@@ -42,7 +42,6 @@ singleton_implementation(RSHookSettingManager)
     SEL makeCellInfoSEL = @selector(switchCellForSel:target:title:on:isFitIpadClassic:);
     id(*objc_msgSendTyped)(id self, SEL _cmd, SEL normalCellForSel, id target, id title, _Bool on, _Bool isFitIpadClassic) = (void*)objc_msgSend;
     MMTableViewCellInfo *cellInfo = objc_msgSendTyped(objc_getClass("MMTableViewCellInfo"), makeCellInfoSEL, selector, target, title, on, 1);
-//    [cellInfo makeSwitchCell:cellInfo];
     [hookSectionInfo addCell:cellInfo];
     return hookSectionInfo;
 }

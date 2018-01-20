@@ -36,6 +36,8 @@ CHDeclareClass(MoreViewController);
 CHDeclareClass(ChatRoomInfoViewController);
 CHDeclareClass(AddContactToChatRoomViewController);
 
+CHDeclareClass(EmoticonBoardView);
+CHDeclareClass(EmoticonBoardBottomTabBar);
 
 static __attribute__((constructor)) void entry(){
     NSLog(@"\n               🎉!!！congratulations!!！🎉\n👍----------------insert dylib success----------------👍");
@@ -141,6 +143,27 @@ CHMethod0(void, ChatRoomInfoViewController, reloadTableData) {
 CHMethod0(void, ChatRoomInfoViewController, initView) {
     CHSuper0(ChatRoomInfoViewController, initView);
 }
+
+#pragma mark - EmoticonBoardView
+CHMethod0(void, EmoticonBoardView, initData) {
+    CHSuper0(EmoticonBoardView, initData);
+    
+}
+
+CHMethod0(void, EmoticonBoardView, initView) {
+    CHSuper0(EmoticonBoardView, initView);
+    
+}
+
+CHMethod1(void, EmoticonBoardView, onEmoticonBoardBottomTabBarClickItem, id, arg1) {
+    CHSuper1(EmoticonBoardView, onEmoticonBoardBottomTabBarClickItem, arg1);
+}
+
+#pragma mark - EmoticonBoardView
+CHMethod0(void, EmoticonBoardBottomTabBar, reloadData) {
+    CHSuper0(EmoticonBoardBottomTabBar, reloadData);
+}
+
 
 #pragma mark - AddContactToChatRoomViewController
 CHMethod0(void, AddContactToChatRoomViewController, reloadTableData) {
@@ -253,5 +276,12 @@ CHConstructor{
     CHLoadLateClass(AddContactToChatRoomViewController);
     CHClassHook0(AddContactToChatRoomViewController, reloadTableData);
 
+    CHLoadLateClass(EmoticonBoardView);
+    CHClassHook0(EmoticonBoardView, initData);
+    CHClassHook0(EmoticonBoardView, initView);
+    CHClassHook1(EmoticonBoardView, onEmoticonBoardBottomTabBarClickItem);
+
+    CHLoadLateClass(EmoticonBoardBottomTabBar);
+    CHClassHook0(EmoticonBoardBottomTabBar, reloadData);
 }
 

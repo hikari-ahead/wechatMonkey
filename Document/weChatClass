@@ -3,6 +3,10 @@ MoreViewController: 我
 BaseMsgContentViewController: 聊天界面
 ChatRoomInfoViewController: 群聊设置界面
 AddContactToChatRoomViewController: 单聊设置页面
+EmoticonBoardBottomTabBar: 表情底部选择分类的bar，包含一个m_collectionView，其DataSource就是这个bar
+EmoticonBoardPageCollectionController: 表情所布局处的视图，包含m_collectionView
+
+
 
 在MoreViewController添加额外Section:
 a = [MMTableViewSectionInfo sectionInfoDefaut];
