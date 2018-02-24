@@ -162,7 +162,6 @@ CHMethod1(void, EmoticonBoardView, onEmoticonBoardBottomTabBarClickItem, id, arg
 
 CHMethod1(void, EmoticonBoardView, onTapEmoticonWrap, id, arg1) {
     CHSuper1(EmoticonBoardView, onTapEmoticonWrap, arg1);
-//    object_setIvar(arg1, class_getInstanceVariable(objc_getClass("CEmoticonWrap"), "m_nsMD5"), @"CEmoticonWrap");
 }
 
 #pragma mark - EmoticonBoardView
