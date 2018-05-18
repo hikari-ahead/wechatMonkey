@@ -234,6 +234,26 @@ CHMethod2(BOOL, MicroMessengerAppDelegate, application, UIApplication*, arg1, di
     return finish;
 }
 
+#pragma mark - AntiAntiWeChat
+/**
+ [NSBundle.mainBundle bundleIdentifier]方式获取bundleId
+ */
+CHMethod0(NSString *, NSBundle, bundleIdentifier) {
+    NSString *realValue = CHSuper0(NSBundle, bundleIdentifier);
+    if ([realValue isEqualToString:RS_REAL_BUNDLE_ID]) {
+        return RS_ORI_BUNDLE_ID;
+    }
+    return realValue;
+}
+
+CHMethod1(id, NSBundle, objectForInfoDictionaryKey, NSString*, key) {
+    NSString *realValue = CHSuper1(NSBundle, objectForInfoDictionaryKey, key);
+    if ([realValue isEqualToString:RS_REAL_BUNDLE_ID]) {
+        return RS_ORI_BUNDLE_ID;
+    }
+    return realValue;
+}
+
 
 #pragma mark - CHConstructor
 CHConstructor{
