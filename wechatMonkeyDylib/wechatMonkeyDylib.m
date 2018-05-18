@@ -18,6 +18,9 @@
 #import "RSHookSettingManager.h"
 #import <objc/runtime.h>
 
+#define RS_REAL_BUNDLE_ID @"com.resober.wechatMonkey";
+#define RS_ORI_BUNDLE_ID @"com.tencent.xin";
+
 #pragma mark - Declare
 CHDeclareClass(BraceletRankStepsView);
 CHDeclareClass(WCDeviceStepObject);
@@ -40,6 +43,7 @@ CHDeclareClass(EmoticonBoardView);
 CHDeclareClass(EmoticonBoardBottomTabBar);
 CHDeclareClass(EmoticonBoardPageCollectionController);
 
+CHDeclareClass(NSBundle);
 static __attribute__((constructor)) void entry(){
     NSLog(@"\n               🎉!!！congratulations!!！🎉\n👍----------------insert dylib success----------------👍");
     
